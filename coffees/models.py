@@ -1,6 +1,8 @@
 from django.db import models
 
+
 # Create your models here
+from untils.models import TimestampModel
 
 
 class Roast(models.TextChoices):
@@ -18,8 +20,40 @@ class Roast(models.TextChoices):
 class OrginPlace(models.Model):
     name = models.CharField('名稱', max_length=20, unique=True)
 
+    def __str__(self):
+        return self.name
 
-class Coffee(models.Model):
+    class Meta:
+        verbose_name = '產地'
+        verbose_name_plural = '產地'
+
+
+class MainProcessing(models.Model):
+    name = models.CharField('名稱', max_length=20, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '主要處理法'
+        verbose_name_plural = '主要處理法'
+
+
+
+
+
+class Grinding(TimestampModel):
+    name = models.CharField('名稱', max_length=10, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '磨豆方式'
+        verbose_name_plural = '磨豆方式'
+
+
+class Coffee(TimestampModel):
     name = models.CharField('名稱', max_length=20, unique=True)
     weight = models.PositiveIntegerField('重量')
     taste = models.TextField('味道')
@@ -32,3 +66,17 @@ class Coffee(models.Model):
         on_delete=models.PROTECT,
         verbose_name='產地',
     )
+    main_processing = models.ForeignKey(
+        MainProcessing,
+        on_delete=models.PROTECT,
+        verbose_name='主要處理法',
+    )
+
+    grandings = models.ManyToManyField(Grinding, verbose_name='磨豆方式')
+
+    def __str__(self):
+        return f'{self.name}({self.price})'
+
+    class Meta:
+        verbose_name = '咖啡'
+        verbose_name_plural = '咖啡'
