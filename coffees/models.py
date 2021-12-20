@@ -72,7 +72,7 @@ class Coffee(TimestampModel):
         verbose_name='主要處理法',
     )
 
-    grandings = models.ManyToManyField(Grinding, verbose_name='磨豆方式')
+    grindings = models.ManyToManyField(Grinding, verbose_name='磨豆方式')
 
     def __str__(self):
         return f'{self.name}({self.price})'
