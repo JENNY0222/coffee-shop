@@ -2,7 +2,7 @@ from django.db import models
 
 
 # Create your models here
-from untils.models import TimestampModel
+from utils.models import TimestampModel
 
 
 class Roast(models.TextChoices):

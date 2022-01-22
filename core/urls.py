@@ -19,6 +19,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import path, include
 
+from utils.auth_views import register
+
 login_params = {
     'template_name': 'users/login.html',
     'redirect_authenticated_user': True,
@@ -28,6 +30,7 @@ urlpatterns = [
     path('', lambda request: redirect('coffees:index'), name='root'),
     path('login/', LoginView.as_view(**login_params), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('register/', register, name='register'),
     path('coffees/', include('coffees.urls')),
     path('admin/', admin.site.urls),
 ]

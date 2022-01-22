@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from coffees.forms import CoffeeForm
 from coffees.models import Coffee
-from untils.forms import DeleteConfirmForm
+from utils.forms import DeleteConfirmForm
 
 
 def index(request):
