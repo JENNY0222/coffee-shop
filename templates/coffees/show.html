@@ -1,6 +1,18 @@
 {% extends 'layout.html' %}
 
 {% block main %}
+{% if perms.coffees.delete_coffee %}
+    <a href="{% url 'coffees:delete' coffee.id %}"
+       class="btn btn-danger float-right">
+        刪除
+    </a>
+{% endif %}
+{% if perms.coffees.edit_coffee %}
+    <a href="{% url 'coffees:edit' coffee.id %}"
+       class="btn btn-info float-right mr-2">
+        編輯
+    </a>
+{% endif %}
 <!-- 加上導向編輯頁面的按鈕 -->
 <a href="{% url 'coffees:delete' coffee.id %}"
    class="btn btn-info float-right mr-2">
