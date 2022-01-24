@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -123,6 +124,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = '/'
@@ -147,12 +152,12 @@ try:
         email_data = file.readlines()
         email_account, email_password = email_data
 
-    EMAIL_HOST_USER = email_account.strip()
+        EMAIL_HOST_USER = email_account.strip()
 
-    EMAIL_HOST_PASSWORD = email_password.strip()
+        EMAIL_HOST_PASSWORD = email_password.strip()
 except FileNotFoundError:
-    print('core/email.txt does not exist.')
+    print('core/email.txt is not exists.')
 except ValueError:
     print('core/email.txt does not have email account or password.')
 except Exception as e:
-    print(e)
+    print(type(e))
